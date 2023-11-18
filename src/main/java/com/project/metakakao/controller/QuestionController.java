@@ -8,11 +8,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping("/question")
 @Log4j2
 @RequiredArgsConstructor
@@ -20,6 +21,10 @@ public class QuestionController {
     private final QuestionService questionService;
     private final UserService userService;
 
+    @GetMapping
+    public String question() {
+        return "/question/question";
+    }
     /*
     @PostMapping("/{id}")
     public ResponseEntity<?> ask(QuestionDto questionDto) throws Exception {
