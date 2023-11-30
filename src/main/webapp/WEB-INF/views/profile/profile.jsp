@@ -4,26 +4,26 @@
     <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
-    <link rel="stylesheet" href="../../../resources/css/question.css" />
+    <link rel="stylesheet" href="../../../resources/css/profile.css" />
 </head>
 <body>
 <div class="sidebar"></div>
 <div class="content">
     <header>
-    <div class="image"><img class="profile" src="../../../resources/assets/default.png"></div>
-    <div class="nickname">홍길동</div>
-    <button id="modalOpenButton">익명질문 남기기</button>
-    <div id="modalContainer" class="hidden">
-        <div id="modalContent">
-            <form action="../profile/profile.jsp"> <!--Todo: 만들기 -->
-                <textarea></textarea>
-                <table>
-                    <tr><td class="info"><input type="submit" id="complete" value="작성완료"></td><td class="info"><button id="modalCloseButton">취소하기</button></td></tr>
-                </table>
-            </form>
+        <div class="image"><img class="profile" src="../../../resources/assets/default.png"></div>
+        <div class="nickname">홍길동</div>
+        <button id="modalOpenButton">익명질문 남기기</button>
+        <div id="modalContainer" class="hidden">
+            <div id="modalContent">
+                <form action="../profile/profile.jsp"> <!--Todo: 만들기 -->
+                    <textarea></textarea>
+                    <table>
+                        <tr><td class="info"><input type="submit" id="complete" value="작성완료"></td><td class="info"><button id="modalCloseButton">취소하기</button></td></tr>
+                    </table>
+                </form>
+            </div>
         </div>
-    </div>
-    <hr>
+        <hr>
     </header>
     <main>
         <div id="info">

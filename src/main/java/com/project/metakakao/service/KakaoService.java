@@ -16,11 +16,11 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class KakaoService {
 
-    @Value("${kakao.client-id}")
+    @Value("${spring.security.oauth2.client.registration.kakao.client-id}")
     private String KAKAO_CLIENT_ID;
-    @Value("${kakao.client-secret}")
+    @Value("${spring.security.oauth2.client.registration.kakao.client-secret}")
     private String KAKAO_CLIENT_SECRET;
-    @Value("${kakao.redirect-url}")
+    @Value("${spring.security.oauth2.client.registration.kakao.redirect_uri}")
     private String KAKAO_REDIRECT_URL;
     //RestAPI, 리디렉트 uri, secret 코드 각각 private 선언
 
@@ -38,7 +38,7 @@ public class KakaoService {
     }
     //Flow는 여기서KakaoController 로 이동
 
-    public KakaoDTO getKakaoInfo(String code) throws Exception {
+    public KakaoDTO getKakaoInfo(String code) throws Exception { // cf) alt + f7: 사용된 곳 보기
         //얘는 KakaoController의 호출로 넘어옴, KakaoDTO class의 함수
         if (code == null) throw new Exception("Failed get authorization code");
         //Authorization 코드를 받지 못할 경우 예외 리턴
