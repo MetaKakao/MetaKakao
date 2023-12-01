@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
-
     private final PasswordEncoder passwordEncoder;
-
     @Override
     public void join(MemberJoinDTO memberJoinDTO) throws MidExistException{
 
@@ -27,7 +25,6 @@ public class MemberServiceImpl implements MemberService{
         if(exist){
             throw new MidExistException();
         }
-
         Member member = Member.builder()
                 .mid(memberJoinDTO.getMid())
                 .mpw(memberJoinDTO.getMpw())

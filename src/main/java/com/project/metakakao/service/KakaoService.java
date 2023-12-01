@@ -1,8 +1,12 @@
 package com.project.metakakao.service;
 
 import com.project.metakakao.dto.KakaoDTO;
+import com.project.metakakao.entity.Member;
+import com.project.metakakao.entity.MemberRole;
+import com.project.metakakao.repository.MemberRepository;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,8 +17,18 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+//엑세스 토큰 관리를 위한 세션저장
+
+
 @Service
 public class KakaoService {
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Value("${spring.security.oauth2.client.registration.kakao.client-id}")
     private String KAKAO_CLIENT_ID;
@@ -38,7 +52,7 @@ public class KakaoService {
     }
     //Flow는 여기서KakaoController 로 이동
 
-    public KakaoDTO getKakaoInfo(String code) throws Exception { // cf) alt + f7: 사용된 곳 보기
+    public KakaoDTO getKakaoInfo(String code, HttpServletRequest request) throws Exception { // cf) alt + f7: 사용된 곳 보기
         //얘는 KakaoController의 호출로 넘어옴, KakaoDTO class의 함수
         if (code == null) throw new Exception("Failed get authorization code");
         //Authorization 코드를 받지 못할 경우 예외 리턴
@@ -60,17 +74,17 @@ public class KakaoService {
 
             headers.add("Content-type", "application/x-www-form-urlencoded");
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            params.add("grant_type"   , "authorization_code");
-            params.add("client_id"    , KAKAO_CLIENT_ID);
+            params.add("grant_type", "authorization_code");
+            params.add("client_id", KAKAO_CLIENT_ID);
             params.add("client_secret", KAKAO_CLIENT_SECRET);
-            params.add("redirect_uri" , KAKAO_REDIRECT_URL);
-            params.add("code"         , code);
+            params.add("redirect_uri", KAKAO_REDIRECT_URL);
+            params.add("code", code);
 
             RestTemplate restTemplate = new RestTemplate();
             //RestTemplate 클래스는, Java에서 RESTful 서비스를 소비하는 데 사용되는 클래스,
             //GET, POST, PUT, DELETE 등의 HTTP 메소드를 사용하여 요청을 보냄
             HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(params, headers);
-            System.out.println("httpEntity: "+ httpEntity);
+            System.out.println("httpEntity: " + httpEntity);
             //위에서 삽입했던 headers와 params를 가지고 Http Entity를 맹글어줌(URL 탄생)
 
             //ResponseEntity를 통해 restTemplate객체로 요청했을때 응답을 받아옴,
@@ -85,20 +99,22 @@ public class KakaoService {
             JSONObject jsonObj = (JSONObject) jsonParser.parse(response.getBody());
             //JsonObj 선언 String객체로 변환한 response를 다시 JsonData로 변환
 
-            accessToken  = (String) jsonObj.get("access_token");    //access_token획득
+            accessToken = (String) jsonObj.get("access_token");    //access_token획득
             refreshToken = (String) jsonObj.get("refresh_token");   //refresh_token획득
-            System.out.println("access_token: "+ accessToken);      //출력함 해보고
-            System.out.println("refresh_token: "+ refreshToken);
+            System.out.println("access_token: " + accessToken);      //출력함 해보고
+            System.out.println("refresh_token: " + refreshToken);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("accessToken", accessToken);
+            session.setAttribute("refreshToken", refreshToken);
 
         } catch (Exception e) {
             throw new Exception("API call failed");
         }
-        return getUserInfoWithToken(accessToken);   //리턴해서 이제 accessToken을 파라미터로 아래 함수 호출
+        return getUserInfoWithToken(accessToken, refreshToken);   //리턴해서 이제 accessToken을 파라미터로 아래 함수 호출
     }
 
-    private KakaoDTO getUserInfoWithToken(String accessToken) throws Exception {
-
-
+    private KakaoDTO getUserInfoWithToken(String accessToken, String refreshToken) throws Exception {
         //HttpHeader 생성
         //curl -v -X GET "https://kapi.kakao.com/v2/user/me" \
         //  -H "Authorization: Bearer ${ACCESS_TOKEN}"
@@ -119,7 +135,7 @@ public class KakaoService {
 
         //Response 데이터 JSON 파싱
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObj    = (JSONObject) jsonParser.parse(response.getBody());
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(response.getBody());
         JSONObject account = (JSONObject) jsonObj.get("kakao_account");
         JSONObject profile = (JSONObject) account.get("profile");
 
@@ -127,10 +143,39 @@ public class KakaoService {
         String email = String.valueOf(account.get("email"));
         String nickname = String.valueOf(profile.get("nickname"));
 
-        return KakaoDTO.builder()
+        KakaoDTO kakaoUser = KakaoDTO.builder()
                 .id(id)
                 .email(email)
-                .nickname(nickname).build();
+                .nickname(nickname)
+                .build();
+
+        // 사용자 정보를 Member 엔티티에 저장
+        saveKakaoUser(kakaoUser, refreshToken);
+
+        return kakaoUser;
         //끝~
     }
+    private void saveKakaoUser(KakaoDTO kakaoUser, String refreshToken) {
+        Optional<Member> existingMember = memberRepository.findById(kakaoUser.getEmail()); //repo메서드로 조회
+        if (existingMember.isPresent()) {
+            //존재하면 정보업데이트로직
+            Member member = existingMember.get();   //기존정보 get해서
+            member.setNickname(kakaoUser.getNickname());    //닉네임 업뎃
+            member.setRefreshToken(refreshToken);   //refreshToken업뎃
+            memberRepository.save(member);  //저장
+        } else {
+            //존재X
+            Member newMember = Member.builder() //빌더로 설정
+                    .mid(kakaoUser.getEmail()) //이메일 생성
+                    .mpw("1111") // 비번1111고정
+                    .email(kakaoUser.getEmail()) //
+                    .nickname(kakaoUser.getNickname()) // 카카오 닉네임
+                    .refreshToken(refreshToken) // 리프레시 토큰
+                    .roleSet(Collections.singleton(MemberRole.USER)) // 역할 설정
+                    .build();
+            memberRepository.save(newMember);
+        }
+    }
+
+
 }

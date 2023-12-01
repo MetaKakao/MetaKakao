@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j2
 @RequiredArgsConstructor
 public class ProfileController {
-
     @PreAuthorize("hasRole('USER')")
     @GetMapping
     public String profile() {return "/profile/profile";

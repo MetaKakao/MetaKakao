@@ -1,0 +1,49 @@
+/* Save this content as main.css in your resources/assets/css directory */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.bg-image {
+    background-image: url('../assets/background_woman.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 100%;
+}
+
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.logo {
+    margin-bottom: 30px;
+}
+
+.login-button {
+    background-color: #ffeb3b; /* Yellow background */
+    color: #000; /* Black text */
+    padding: 15px 30px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.login-button img {
+    margin-right: 10px;
+}
+
+.login-button:hover {
+    background-color: #e0d215; /* Darker yellow on hover */
+}

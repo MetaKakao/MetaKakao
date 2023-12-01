@@ -49,4 +49,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         log.info(memberSecurityDTO);
         return memberSecurityDTO;
     }
+    public void createMemberEntity(String accessToken, String refreshToken){
+
+    }
 }
