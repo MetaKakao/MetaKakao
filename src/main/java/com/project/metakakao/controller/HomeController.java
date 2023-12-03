@@ -15,7 +15,8 @@ public class HomeController {
     @RequestMapping(value="/", method= RequestMethod.GET)
     public String login(Model model) {
         model.addAttribute("kakaoUrl", kakaoService.getKakaoLogin());
+
         //getKakaoLogin함수 실행, authorizatio코드 요청
-        return "index";//루트 url 에서 index.html 리턴
+        return "main";//루트 url 에서 index.html 리턴
     }
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -17,20 +18,27 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long qno;
 
     @Column(nullable = false)
     private String content;
 
-    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
-    @JoinColumn(name = "USER_ID", updatable = false)
-    @JsonBackReference
-    private User writer; // 작성자
+    private LocalDateTime regDate;
 
-    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
+//    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = Member.class)
+//    @JoinColumn(name = "USER_ID", updatable = false)
+//    @JsonBackReference
+//    private Member writer; // 작성자
+
+    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = Member.class)
     @JoinColumn(name = "HOST_ID", updatable = false)
     @JsonBackReference
-    private User host; // 질문 받는 사람
+    private Member host; // 질문 받는 사람
 
-    private String answer;
+    @OneToOne
+    @JoinColumn(name = "ANSWER_ID")
+    private Answer answer; // 외래키가 주 테이블에 있는 단방향 연관관계
+
+    private int status; // 답변 완료: 1, 미응답: 0
+
 }

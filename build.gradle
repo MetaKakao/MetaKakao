@@ -26,6 +26,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'javax.servlet:jstl'
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.modelmapper:modelmapper:3.1.0'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
@@ -33,7 +36,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'com.googlecode.json-simple:json-simple:1.1.1' //JsonParser사용
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' //thymeleaf
 }
 
 tasks.named('test') {
