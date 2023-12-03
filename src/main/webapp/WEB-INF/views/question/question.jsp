@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../../resources/css/question.css" />
 </head>
 <body>
-<div class="sidebar"></div>
+<div class="sidebar"></div>git gi
 <div class="content">
     <header>
     <div class="image"><img class="profile" src="../../../resources/assets/default.png"></div>
