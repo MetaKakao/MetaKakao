@@ -7,7 +7,22 @@
     <link rel="stylesheet" href="../../../resources/css/question.css" />
 </head>
 <body>
-<div class="sidebar"></div>git gi
+<div class="sidebar"></div>
+    <%
+        session = request.getSession();
+        String accessToken = (String) session.getAttribute("accessToken");
+
+        if (accessToken != null && !accessToken.isEmpty()) {
+    %>
+    <button id="logoutButton">로그아웃</button>
+    <%
+    } else {
+    %>
+    <button id="loginButton">로그인</button>
+    <%
+        }
+    %>
+<div class="sidebar"></div>
 <div class="content">
     <header>
     <div class="image"><img class="profile" src="../../../resources/assets/default.png"></div>

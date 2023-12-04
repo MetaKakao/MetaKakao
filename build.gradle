@@ -36,7 +36,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'com.googlecode.json-simple:json-simple:1.1.1' //JsonParser사용
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' //thymeleaf
 }
 
 tasks.named('test') {

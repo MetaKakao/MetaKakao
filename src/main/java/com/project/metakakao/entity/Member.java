@@ -10,18 +10,19 @@ import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "roleSet")
 public class Member {
-
     @Id
     private String mid;
-
     private String mpw;
     private String email;
-
+    private String nickname;
+    private String accessToken;
+    private String refreshToken;
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
     private Set<MemberRole> roleSet = new HashSet<>();
@@ -54,4 +55,6 @@ public class Member {
         this.numRejected++;
     }
 
+    public void setAccessToken(String accessToken) {
+    }
 }

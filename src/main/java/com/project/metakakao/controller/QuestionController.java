@@ -55,6 +55,7 @@ public class QuestionController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
     // 거절 질문은 클릭이 안됨(host와 타인 모두) 아예 db에서도 삭제할 것임.
     // 삭제는 질문 주인(not 작성자)만 할 수 있음. -> 어떻게 구현하지?
     @DeleteMapping("/{id}")
