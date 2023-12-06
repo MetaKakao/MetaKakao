@@ -4,7 +4,6 @@ import lombok.*;
 
 @Builder
 @Data
-
 public class KakaoDTO {
     private long id;
     private String email;

@@ -13,6 +13,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     public List<Question> readAllByMid(String hostID, int status);
 
     @Modifying // update, delete 메소드에는 넣어줘야 함.
-    @Query("delete from Question q where q.host.mid =:hostID and q.id =:qno")
+    @Query("delete from Question q where q.host.mid =:hostID and q.qno =:qno")
     public void deleteByHostID(String hostID, Long qno);
 }

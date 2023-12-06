@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form action="list" method="post">
+<form action="make" method="post">
     <label for="quizTitle">퀴즈 제목:</label>
     <input type="text" id="quizTitle" name="quizTitle" required>
 
