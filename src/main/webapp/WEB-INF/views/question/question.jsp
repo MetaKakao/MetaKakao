@@ -8,6 +8,21 @@
 </head>
 <body>
     <div class="background">
+        <div class = userInfo>
+            조동영님 환영합니다. |
+            <%
+                session = request.getSession();
+                String accessToken = (String) session.getAttribute("accessToken");
+                if (accessToken != null && !accessToken.isEmpty()) {
+            %>로그아웃
+            <%
+            } else {
+            %>
+            로그인
+            <%
+                }
+            %>
+        </div>
         <div class ="profile">
             <div class="image">
 
@@ -31,20 +46,6 @@
         </div>
 
     </div>
-<%--    <%--%>
-<%--        session = request.getSession();--%>
-<%--        String accessToken = (String) session.getAttribute("accessToken");--%>
-
-<%--        if (accessToken != null && !accessToken.isEmpty()) {--%>
-<%--    %>--%>
-<%--    <button id="logoutButton">로그아웃</button>--%>
-<%--    <%--%>
-<%--    } else {--%>
-<%--    %>--%>
-<%--    <button id="loginButton">로그인</button>--%>
-<%--    <%--%>
-<%--        }--%>
-<%--    %>--%>
 <%--<div class="sidebar"></div>--%>
 <%--<div class="content">--%>
 <%--    <header>--%>
