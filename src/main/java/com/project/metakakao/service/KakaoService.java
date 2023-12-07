@@ -132,6 +132,7 @@ public class KakaoService {
                 httpEntity,
                 String.class
         );
+        System.out.print("Response Body: " + response.getBody());
 
         //Response 데이터 JSON 파싱
         JSONParser jsonParser = new JSONParser();

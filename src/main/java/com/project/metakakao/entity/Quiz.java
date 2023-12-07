@@ -20,28 +20,30 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long quizNo;
 
+    private int a1;
+    private int a2;
+    private int a3;
+    private int a4;
+    private int a5;
+    private int a6;
+    private int a7;
+    private int a8;
+    private int a9;
+    private int a10;
+
+
     @Column(nullable = false)
     private String title;
     private String q1;
-    private int a1;
     private String q2;
-    private int a2;
     private String q3;
-    private int a3;
     private String q4;
-    private int a4;
     private String q5;
-    private int a5;
     private String q6;
-    private int a6;
     private String q7;
-    private int a7;
     private String q8;
-    private int a8;
     private String q9;
-    private int a9;
     private String q10;
-    private int a10;
 
 
 

@@ -27,19 +27,15 @@ import java.util.List;
 @Log4j2
 @RequiredArgsConstructor
 public class QuizController extends HttpServlet {
-
-    private QuizService quizService;
-
+    private final QuizService quizService;
     @GetMapping
     public String newquiz() {
         return "/quiz/newquiz";
     }
-
     @GetMapping("/myquiz")
     public String myquiz() {
         return "quiz/myquiz";
     }
-
     @PostMapping("/list")
     public String list() {
         return "quiz/quizlist";
@@ -67,6 +63,8 @@ public class QuizController extends HttpServlet {
                     .email(kakaoDTO.getEmail())
                     .nickname(kakaoDTO.getNickname())
                     .build();
+            log.info(kakaoDTO.getEmail());
+            log.info(kakaoDTO.getNickname());
             CreateQuizDTO createQuizDTO = CreateQuizDTO.builder()
                     .title(quizTitle)
                     .q1(questions.get(0))

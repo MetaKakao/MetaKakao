@@ -34,7 +34,7 @@ public class QuizServiceImpl implements QuizService{
     private MemberRepository memberRepository;
     private ModelMapper modelMapper;
     private QuizRepository quizRepository;
-    private final static String KAKAO_AUTH_URI = "https://kauth.kakao.com";
+    private final static String KAKAO_API_URI = "https://kapi.kakao.com";
     //Authorization 코드 받기 위한 도메인
     public KakaoDTO getUserInfoWithToken(String accessToken) throws Exception {
         //HttpHeader 생성
@@ -42,18 +42,19 @@ public class QuizServiceImpl implements QuizService{
         //  -H "Authorization: Bearer ${ACCESS_TOKEN}"
         //위 양식에 따라 요청,
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer " + accessToken);
+        headers.add("Authorization", "Bearer "+ accessToken);
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
         //HttpHeader 담기, 위의 과정과 동일
         RestTemplate restTem = new RestTemplate();
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTem.exchange(
-                KAKAO_AUTH_URI + "/v2/user/me",
+                KAKAO_API_URI + "/v2/user/me",
                 HttpMethod.POST,
                 httpEntity,
                 String.class
         );
+        log.info("Response Body: " + response.getBody());
 
         //Response 데이터 JSON 파싱
         JSONParser jsonParser = new JSONParser();
@@ -73,7 +74,7 @@ public class QuizServiceImpl implements QuizService{
                 .email(email)
                 .nickname(nickname)
                 .build();
-
+        log.info(kakaoUser);
         return kakaoUser;
         //끝~
     }
