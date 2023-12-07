@@ -17,9 +17,14 @@
                 <div class="birth">2000.04.08</div>
                 <div class="birth">짜파게티 먹고싶다.</div>
             </div>
+            <button class = "ans_complete">답변완료</button>
+            <button class = "new_question">새 질문</button>
         </div>
-        <div class ="new_contexnt">
-            
+        <div class="new_contexnt">
+            <form id="questionForm">
+                <textarea id="userQuestion" placeholder="지금 동영님에게 질문을 남겨보세요"></textarea>
+                <button type="submit">등록</button>
+            </form>
         </div>
         <div class ="content">
 

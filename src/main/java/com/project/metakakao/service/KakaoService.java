@@ -106,7 +106,8 @@ public class KakaoService {
 
             HttpSession session = request.getSession();
             session.setAttribute("accessToken", accessToken);
-            session.setAttribute("refreshToken", refreshToken);
+            //session.setAttribute("refreshToken", refreshToken);
+            //리프토큰은 세션에 저장X
 
         } catch (Exception e) {
             throw new Exception("API call failed");
