@@ -22,6 +22,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,12 +31,12 @@ import java.util.Optional;
 @Transactional
 public class QuizServiceImpl implements QuizService{
 
-    private KakaoService kakaoService;
-    private MemberRepository memberRepository;
-    private ModelMapper modelMapper;
-    private QuizRepository quizRepository;
-    private final static String KAKAO_AUTH_URI = "https://kauth.kakao.com";
-    //Authorization 코드 받기 위한 도메인
+    private final ModelMapper modelMapper;
+    private final QuizRepository quizRepository;
+
+    private final static String KAKAO_API_URI = "https://kapi.kakao.com";
+    //Access TOken 받은 후 유저 정보 받기위한 도메인
+
     public KakaoDTO getUserInfoWithToken(String accessToken) throws Exception {
         //HttpHeader 생성
         //curl -v -X GET "https://kapi.kakao.com/v2/user/me" \
@@ -49,7 +50,7 @@ public class QuizServiceImpl implements QuizService{
         RestTemplate restTem = new RestTemplate();
         HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTem.exchange(
-                KAKAO_AUTH_URI + "/v2/user/me",
+                KAKAO_API_URI + "/v2/user/me",
                 HttpMethod.POST,
                 httpEntity,
                 String.class
@@ -78,9 +79,18 @@ public class QuizServiceImpl implements QuizService{
         //끝~
     }
 
-    public Long register(CreateQuizDTO createQuizDTO) {
+    public Quiz findQuizById(String mid, Long quizNo) {
+        Quiz quiz = quizRepository.findByMid(mid, quizNo);
+        return quiz;
+    }
+
+    public List<Quiz> findAllQuizById(String mid) {
+        List<Quiz> quizList = quizRepository.findAllByMid(mid);
+        return quizList;
+    }
+
+    public void register(CreateQuizDTO createQuizDTO) {
         Quiz quiz = modelMapper.map(createQuizDTO, Quiz.class);
-        Long quizNo = quizRepository.save(quiz).getQuizNo();
-        return quizNo;
+        quizRepository.save(quiz);
     }
 }

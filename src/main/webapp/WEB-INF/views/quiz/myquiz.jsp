@@ -14,6 +14,10 @@
     <% for (int i = 1; i <= 10; i++) { %>
     <label for="question<%=i%>">문제 <%=i%>:</label>
     <textarea id="question<%=i%>" name="question<%=i%>" rows="4" cols="50" required></textarea><br>
+    <!-- O/X 버튼 추가 -->
+    <input type="radio" id="answer<%=i%>" name="answer<%=i%>" value="O" />O
+    <input type="radio" id="answer<%=i%>" name="answer<%=i%>" value="X" />X
+    <br>
     <% } %>
 
     <br>

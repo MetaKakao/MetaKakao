@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,21 +10,23 @@
 
 <h2>퀴즈 목록</h2>
 
-<%
-    // 이전에 저장한 퀴즈 데이터를 가져오기
-    String quizTitle = request.getAttribute("quizTitle").toString();
-    List<String> questions = new ArrayList<>();
-    for(int i = 1; i <= 10; i++) {
-        questions.add(request.getAttribute("question"+i).toString());
-    }
-%>
 <div>
-    <h3><%= quizTitle %></h3>
-    <ul>
-        <% for (String question : questions) { %>
-        <li><%= question %></li>
-        <% } %>
-    </ul>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>제목</th>
+            <th>작성 일자</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="index" begin="0" end="${titles.size() - 1}">
+            <tr>
+                <td>${titles[index]}</td>
+                <td>${regDates[index]}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

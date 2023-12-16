@@ -2,6 +2,7 @@ package com.project.metakakao.service;
 
 import com.project.metakakao.dto.QuestionDTO;
 import com.project.metakakao.entity.Question;
+import com.project.metakakao.entity.Quiz;
 import com.project.metakakao.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
