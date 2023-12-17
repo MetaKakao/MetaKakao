@@ -99,6 +99,7 @@ public class QuizController extends HttpServlet {
         List<Quiz> quizList = quizService.findAllQuizById(mid);
         List<String> titles = new ArrayList<>();
         List<LocalDateTime> regDates = new ArrayList<>();
+        model.addAttribute("mid", mid);
 
         for (Quiz quiz : quizList) {
             titles.add(quiz.getTitle());
@@ -114,8 +115,8 @@ public class QuizController extends HttpServlet {
     // 단건 조회
 
     // 퀴즈 생성
-    @PostMapping("make")
-    public ResponseEntity makeQuiz(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @PostMapping("/make")
+    public ResponseEntity makeQuiz(Model model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String quizTitle = request.getParameter("quizTitle");
         log.info("quizTitle: " + quizTitle);
         List<String> questions = new ArrayList<>();
@@ -167,7 +168,8 @@ public class QuizController extends HttpServlet {
             log.info("받아온 질문 1: " + questions.get(0));
             // db에 저장
             quizService.register(createQuizDTO);
-            response.sendRedirect("/quiz/list");
+            String mid = member.getMid();
+            response.sendRedirect("/quiz/" + mid +"/list");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

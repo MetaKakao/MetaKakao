@@ -21,7 +21,7 @@
         <tbody>
         <c:forEach var="index" begin="0" end="${titles.size() - 1}">
             <tr>
-                <td>${titles[index]}</td>
+                <td><a href="/quiz/game/${mid}/${index+1}">${titles[index]}</a></td>
                 <td>${regDates[index]}</td>
             </tr>
         </c:forEach>

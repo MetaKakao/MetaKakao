@@ -30,7 +30,7 @@ public class Question {
 //    @JsonBackReference
 //    private Member writer; // 작성자
 
-    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = Member.class)
+    @ManyToOne(cascade = CascadeType.PERSIST, targetEntity = Member.class)
     @JoinColumn(name = "HOST_ID", updatable = false)
     @JsonBackReference
     private Member host; // 질문 받는 사람

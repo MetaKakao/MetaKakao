@@ -64,7 +64,7 @@ public class QuestionController {
         MemberSecurityDTO memberSecurityDTO = ((MemberSecurityDTO) auth.getPrincipal());
         String hostID = memberSecurityDTO.getMid();
         questionService.remove(hostID, id);
-        Optional<Member> member = memberRepository.findById(hostID);
+        Optional<Member> member = memberRepository.findById(id);
         member.get().addRejected(); // question 삭제하면 거절 질문 개수 +1
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

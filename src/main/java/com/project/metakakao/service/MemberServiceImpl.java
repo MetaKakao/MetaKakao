@@ -20,7 +20,10 @@ public class MemberServiceImpl implements MemberService{
 
         String mid = memberJoinDTO.getMid();
 
-        boolean exist = memberRepository.existsById(mid);
+        boolean exist = false;
+        if(memberRepository.getWithRoles(mid).isPresent()){
+            exist = true;
+        }
 
         if(exist){
             throw new MidExistException();

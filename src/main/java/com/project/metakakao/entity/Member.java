@@ -17,6 +17,8 @@ import java.util.Set;
 @ToString(exclude = "roleSet")
 public class Member {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String mid;
     private String mpw;
     private String email;
@@ -32,6 +34,9 @@ public class Member {
     @JoinColumn(name = "QUESTION_ID", updatable = false) //
     @JsonBackReference
     private List<Question> questionList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "host") // 엔티티 상태를 병합(Merge)할 때, 연관된 하위 엔티티도 모두 병합
+    private List<Quiz> quizList;
 
     private Long numRejected; // 거절 질문 개수
 

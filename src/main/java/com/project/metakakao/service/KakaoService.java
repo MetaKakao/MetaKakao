@@ -156,7 +156,7 @@ public class KakaoService {
         //끝~
     }
     private void saveKakaoUser(KakaoDTO kakaoUser, String refreshToken) {
-        Optional<Member> existingMember = memberRepository.findById(kakaoUser.getEmail()); //repo메서드로 조회
+        Optional<Member> existingMember = memberRepository.findByEmail(kakaoUser.getEmail()); //repo메서드로 조회
         if (existingMember.isPresent()) {
             //존재하면 정보업데이트로직
             Member member = existingMember.get();   //기존정보 get해서

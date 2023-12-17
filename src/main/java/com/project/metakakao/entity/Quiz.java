@@ -55,11 +55,15 @@ public class Quiz {
 
     private LocalDateTime modDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Member.class)
-    @JoinColumn(name = "HOST_ID", updatable = false)
-    @JsonBackReference
-    private Member host; // 질문 작성자 -> 본인
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Member.class)
+//    @JoinColumn(name = "HOST_ID", updatable = false)
+//    @JsonBackReference
+//    private Member host; // 질문 작성자 -> 본인
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_id")
+    @JsonBackReference
+    private Member host; // 퀴즈 작성자 -> 본인
 
 
 }
