@@ -9,7 +9,7 @@ body{
     margin: 50px auto;
     background-color: #fff;
     padding: 10px 50px 30px 50px;
-    border: 2px solid #EED0DC;
+    border: 2px solid #B9EDF0;
     border-radius: 20px;
     box-shadow: 5px 5px 5px #cbcbcb;
 }
@@ -22,7 +22,7 @@ body{
 /* 문제 영역 */
 .grid #question{
     font-size: 24px;
-    background-color: #C34C74; color: #fff;
+    background-color: #0B868E; color: #fff;
     font-size: 1.2em;
     padding: 10px 2em;
     border-radius: 15px;
@@ -39,24 +39,25 @@ body{
 /* 버튼 영역 */
 .buttons{
     padding: 30px 20px;
-    border: 2px solid #EED0DC;
+    border: 2px solid #B9EDF0;
     border-radius: 20px;
 }
 .btn{
-    background-color: #EED0DC;
+    background-color: #B9EDF0;
     color: #333;
     width: 250px;
     font-size: 16px;
-    border: 1px solid #ffe3ed;
+    border: 1px solid #B9EDF0;
     border-radius: 15px;
     margin: 10px 40px 20px 0px;
     padding: 10px;
+    color: white;
     transition: 0.5s;
 }
 .btn:nth-child(2n){ margin-right: 0; }
 .btn:hover{
     cursor: pointer;
-    background-color: #C34C74; color: white;
+    background-color: #0B868E; color: white;
 }
 .btn:focus{ outline: 0; }
 

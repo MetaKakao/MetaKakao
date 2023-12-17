@@ -5,28 +5,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz List</title>
+    <link rel="stylesheet" href="../../../resources/css/quizlist.css">
 </head>
 <body>
-
-<h2>퀴즈 목록</h2>
-
-<div>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>제목</th>
-            <th>작성 일자</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="index" begin="0" end="${titles.size() - 1}">
-            <tr>
-                <td><a href="/quiz/game/${mid}/${index+1}">${titles[index]}</a></td>
-                <td>${regDates[index]}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+<h2>${mid} 님의 퀴즈 목록</h2>
+<div class="container">
+    <div class="left"></div>
+    <div class="center">
+        <div>
+            <table>
+                <tbody>
+                <c:forEach var="index" begin="0" end="${titles.size() - 1}" varStatus="loop">
+                    <tr>
+                        <td><a href="/quiz/game/${mid}/${titles.size() - 1 - loop.index}">${titles[index]}</a></td>
+                        <td>생성일자: ${regDates[titles.size() - 1 - loop.index]}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="right"></div>
 </div>
+
+<!-- 홈화면 가는 버튼 넣어야될듯-->
 </body>
 </html>

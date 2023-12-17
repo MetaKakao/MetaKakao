@@ -100,7 +100,6 @@ public class QuizController extends HttpServlet {
         List<String> titles = new ArrayList<>();
         List<LocalDateTime> regDates = new ArrayList<>();
         model.addAttribute("mid", mid);
-
         for (Quiz quiz : quizList) {
             titles.add(quiz.getTitle());
             regDates.add(quiz.getRegDate());
