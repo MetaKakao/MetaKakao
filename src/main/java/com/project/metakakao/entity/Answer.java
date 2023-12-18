@@ -8,21 +8,21 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "question")
 public class Answer {
-
     @Id
-    @Column(name = "ANSWER_ID")
-    private int ano;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ano;
 
     private String content;
 
     private LocalDateTime regDate;
 
-    public void changeAnswer(String answer) {
-        this.content = answer;
-    }
+    @OneToOne
+    @JoinColumn(name = "QNO", referencedColumnName = "qno")
+    private Question question; // 질문과의 관계
 }
+

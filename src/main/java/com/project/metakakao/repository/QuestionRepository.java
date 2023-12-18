@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    // 답변 완료 질문 조회
-    @Query("select distinct q from Question q where q.host.mid = :hostID and q.status = :status") // left join fetch q.answer은 나중에
-    public List<Question> readAllByMid(String hostID, int status);
 
-    @Modifying // update, delete 메소드에는 넣어줘야 함.
-    @Query("delete from Question q where q.host.mid =:hostID and q.id =:qno")
-    public void deleteByHostID(String hostID, Long qno);
+    @Query("select distinct q from Question q where q.host.id = :hostID and q.status = :status")
+    List<Question> readAllByMid(int hostID, int status);
+
+    @Modifying
+    @Query("delete from Question q where q.host.id = :hostID and q.id = :qno")
+    void deleteByHostID(int hostID, Long qno);
 }

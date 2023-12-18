@@ -1,14 +1,38 @@
 package com.project.metakakao.service;
 
 import com.project.metakakao.dto.QuestionDTO;
+import com.project.metakakao.entity.Member;
 import com.project.metakakao.entity.Question;
+import com.project.metakakao.repository.MemberRepository;
+import com.project.metakakao.repository.QuestionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
-public interface QuestionService {
-    Long register(QuestionDTO questionDTO);
+@Service
+public class QuestionService {
+    @Autowired
+    private QuestionRepository questionRepository; // Repository 의존성 주입
+    @Autowired
+    private MemberRepository memberRepository;
 
-    List<Question> readAll(String hostID, int status);
+    public void saveQuestion(QuestionDTO questionDTO) {
+        Question question = convertToEntity(questionDTO);
+        questionRepository.save(question);
+    }
 
-    void remove(String hostID, Long qno);
+    private Question convertToEntity(QuestionDTO questionDTO) {
+        Question question = new Question();
+        question.setContent(questionDTO.getContent());
+        question.setRegDate(LocalDateTime.now());
+        Member host = memberRepository.findById(questionDTO.getHostID())
+                .orElseThrow(() -> new RuntimeException("host가 존재하지않습니다."));
+        question.setHost(host);
+        question.setStatus(0);
+        return question;
+    }
+    public void deleteQuestion(Long questionId) {
+        questionRepository.deleteById(questionId);
+    }
 }

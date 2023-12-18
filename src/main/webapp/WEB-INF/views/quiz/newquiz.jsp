@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" src="../../../resources/css/newquiz.css">
+    <link rel="stylesheet" href="../../../resources/css/newquiz.css">
     <title>퀴즈 만들기</title>
 </head>
 <body>
@@ -15,8 +15,5 @@
     </div>
     <div class="right"></div>
 </div>
-
-
-
 </body>
 </html>

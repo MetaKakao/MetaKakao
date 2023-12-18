@@ -17,6 +17,6 @@ public class HomeController {
         model.addAttribute("kakaoUrl", kakaoService.getKakaoLogin());
 
         //getKakaoLogin함수 실행, authorizatio코드 요청
-        return "main";//루트 url 에서 index.html 리턴
+        return "main";//루트 url 에서 main.jsp 리턴
     }
 }
