@@ -34,6 +34,6 @@ public class CreateQuizDTO {
     private String a9;
     private String q10;
     private String a10;
-    private Member host;
+    private String hostId;
     private LocalDateTime regDate;
 }

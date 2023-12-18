@@ -15,10 +15,10 @@
         <div>
             <table>
                 <tbody>
-                <c:forEach var="index" begin="0" end="${titles.size() - 1}" varStatus="loop">
+                <c:forEach var="index" begin="0" end="${titles.size()}" varStatus="loop">
                     <tr>
-                        <td><a href="/quiz/game/${mid}/${titles.size() - 1 - loop.index}">${titles[index]}</a></td>
-                        <td>생성일자: ${regDates[titles.size() - 1 - loop.index]}</td>
+                        <td><a href="/quiz/game/${mid}/${index + 1}">${titles[index]}</a></td>
+                        <td>생성일자: ${regDates[index]}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

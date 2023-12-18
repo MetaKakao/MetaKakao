@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
-    @Query("select q from Quiz q where q.host.mid =:mid and q.quizNo =:quizNo")
+    @Query("select q from Quiz q where q.host.email =:mid and q.quizNo =:quizNo")
     public Quiz findByMid(String mid, Long quizNo);
 
-    @Query("select q from Quiz q where q.host.mid =:mid")
+    @Query("select q from Quiz q where q.host.email =:mid")
     public List<Quiz> findAllByMid(String mid);
 }

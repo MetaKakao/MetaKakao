@@ -2,6 +2,7 @@ package com.project.metakakao.service;
 
 import com.project.metakakao.dto.CreateQuizDTO;
 import com.project.metakakao.dto.KakaoDTO;
+import com.project.metakakao.dto.MemberDTO;
 import com.project.metakakao.entity.Member;
 import com.project.metakakao.entity.MemberRole;
 import com.project.metakakao.entity.Quiz;
@@ -33,11 +34,12 @@ public class QuizServiceImpl implements QuizService{
 
     private final ModelMapper modelMapper;
     private final QuizRepository quizRepository;
+    private final MemberRepository memberRepository;
 
     private final static String KAKAO_API_URI = "https://kapi.kakao.com";
     //Access TOken 받은 후 유저 정보 받기위한 도메인
 
-    public KakaoDTO getUserInfoWithToken(String accessToken) throws Exception {
+    public MemberDTO getUserInfoWithToken(String accessToken) throws Exception {
         //HttpHeader 생성
         //curl -v -X GET "https://kapi.kakao.com/v2/user/me" \
         //  -H "Authorization: Bearer ${ACCESS_TOKEN}"
@@ -75,7 +77,12 @@ public class QuizServiceImpl implements QuizService{
                 .nickname(nickname)
                 .build();
 
-        return kakaoUser;
+        MemberDTO memberDTO = MemberDTO.builder()
+                .mid(String.valueOf(kakaoUser.getEmail()))
+                .email(kakaoUser.getEmail())
+                .nickname(kakaoUser.getNickname())
+                .build();
+        return memberDTO;
         //끝~
     }
 
@@ -90,7 +97,32 @@ public class QuizServiceImpl implements QuizService{
     }
 
     public void register(CreateQuizDTO createQuizDTO) {
-        Quiz quiz = modelMapper.map(createQuizDTO, Quiz.class);
+        Member member = memberRepository.findByEmail(createQuizDTO.getHostId()).get();
+        Quiz quiz = Quiz.builder()
+                .title(createQuizDTO.getTitle())
+                .q1(createQuizDTO.getQ1())
+                .a1(createQuizDTO.getA1())
+                .q2(createQuizDTO.getQ2())
+                .a2(createQuizDTO.getA2())
+                .q3(createQuizDTO.getQ3())
+                .a3(createQuizDTO.getA3())
+                .q4(createQuizDTO.getQ4())
+                .a4(createQuizDTO.getA4())
+                .q5(createQuizDTO.getQ5())
+                .a5(createQuizDTO.getA5())
+                .q6(createQuizDTO.getQ6())
+                .a6(createQuizDTO.getA6())
+                .q7(createQuizDTO.getQ7())
+                .a7(createQuizDTO.getA7())
+                .q8(createQuizDTO.getQ8())
+                .a8(createQuizDTO.getA8())
+                .q9(createQuizDTO.getQ9())
+                .a9(createQuizDTO.getA9())
+                .q10(createQuizDTO.getQ10())
+                .a10(createQuizDTO.getA10())
+                .host(member)
+                .regDate(createQuizDTO.getRegDate())
+                .build();
         quizRepository.save(quiz);
     }
 }

@@ -1,5 +1,6 @@
 package com.project.metakakao.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data

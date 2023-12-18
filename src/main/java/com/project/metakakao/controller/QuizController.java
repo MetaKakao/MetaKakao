@@ -3,6 +3,7 @@ package com.project.metakakao.controller;
 
 import com.project.metakakao.dto.CreateQuizDTO;
 import com.project.metakakao.dto.KakaoDTO;
+import com.project.metakakao.dto.MemberDTO;
 import com.project.metakakao.entity.Member;
 import com.project.metakakao.entity.Quiz;
 import com.project.metakakao.service.QuizService;
@@ -129,15 +130,15 @@ public class QuizController extends HttpServlet {
         String accessToken = (String) request.getSession().getAttribute("accessToken");
         log.info("accessToken: " + accessToken);
         try {
-            KakaoDTO kakaoDTO = quizService.getUserInfoWithToken(accessToken); //null
-            Member member = Member.builder()
-                    .mid(String.valueOf(kakaoDTO.getId()))
-                    .email(kakaoDTO.getEmail())
-                    .nickname(kakaoDTO.getNickname())
-                    .build();
-            log.info("회원 id: " + member.getMid());
-            log.info("회원 이메일: " + member.getEmail());
-            log.info("회원 닉네임: " + member.getNickname());
+            MemberDTO memberDTO = quizService.getUserInfoWithToken(accessToken); //null
+//            Member member = Member.builder()
+//                    .mid(String.valueOf(kakaoDTO.getId()))
+//                    .email(kakaoDTO.getEmail())
+//                    .nickname(kakaoDTO.getNickname())
+//                    .build();
+            log.info("회원 id: " + memberDTO.getMid());
+            log.info("회원 이메일: " + memberDTO.getEmail());
+            log.info("회원 닉네임: " + memberDTO.getNickname());
 
             CreateQuizDTO createQuizDTO = CreateQuizDTO.builder()
                     .title(quizTitle)
@@ -161,13 +162,13 @@ public class QuizController extends HttpServlet {
                     .a9(answers.get(8))
                     .q10(questions.get(9))
                     .a10(answers.get(9))
-                    .host(member)
+                    .hostId(memberDTO.getEmail())
                     .regDate(LocalDateTime.now())
                     .build();
             log.info("받아온 질문 1: " + questions.get(0));
             // db에 저장
             quizService.register(createQuizDTO);
-            String mid = member.getMid();
+            String mid = memberDTO.getMid();
             response.sendRedirect("/quiz/" + mid +"/list");
         } catch (Exception e) {
             throw new RuntimeException(e);
