@@ -41,6 +41,10 @@
             %>
         </div>
         <div class ="profile">
+            <button class="quiz" onclick="location.href='/quiz';">
+                <img src="../../../resources/assets/logo.png"/>
+                <div>Quiz?</div>
+            </button>
             <div class="image">
                 <img src = "${user.profileImgUrl}"/>
             </div>
@@ -67,25 +71,40 @@
         %>
         <c:forEach var="question" items="${questionList}" varStatus="status">
             <div class="question-item" id="question-item-${status.index}">
-                <!-- 삭제 버튼 -->
                 <form action="/question/delete" method="post">
                     <input type="hidden" name="questionId" value="${question.qno}"/>
-                    <button type="submit" class="delete_btn">삭제</button>
+                    <button type="submit" class="delete-btn">삭제</button>
                 </form>
-                <div class="question-content">${question.content}
+                <div class="question-content">
+                        ${question.content}
+
+                    <c:if test="${owner}">
+                        <!-- 이미 존재하는 답변 표시 -->
+                        <c:if test="${question.answer != null}">
+                            <div class="existing-answer">
+                                <p>${user.nickname}: ${question.answer.content}</p>
+                                <button type="button" class="update-btn" onclick="toggleAnswerForm(${status.index})">수정하기</button>
+                            </div>
+                        </c:if>
+
+                        <!-- 답변하기 버튼 및 폼 (답변이 없는 경우에만 표시) -->
+                        <c:if test="${question.answer == null}">
+                            <button type="button" class="answer-btn" onclick="toggleAnswerForm(${status.index})">답변하기</button>
+                        </c:if>
+
+                        <!-- 답변 폼 -->
+                        <div class="answer-form" id="answer-form-${status.index}" style="display: none;">
+                            <form action="/question/answer" method="post">
+                                <input type="hidden" name="questionId" value="${question.qno}" />
+                                <textarea name="answerContent" placeholder="답변을 여기에 작성하세요">${question.answer != null ? question.answer.content : ''}</textarea>
+                                <button type="submit" class="submit-btn">답변 제출</button>
+                            </form>
+                        </div>
+                    </c:if>
                 </div>
-                <c:if test="${owner}">
-                    <!-- 답변하기 버튼 -->
-                    <button type="button" class="answer-btn" onclick="toggleAnswerForm(${status.index})">답변하기</button>
-                    <!-- 답변 폼 (숨겨진 상태로 시작) -->
-                    <form action="/question/answer" method="post" class="answer-form" id="answer-form-${status.index}" style="display: none;">
-                        <input type="hidden" name="questionId" value="${question.qno}"/>
-                        <textarea name="answerContent" placeholder="답변을 여기에 작성하세요"></textarea>
-                        <button type="submit" class="submit-answer">답변 제출</button>
-                    </form>
-                </c:if>
             </div>
         </c:forEach>
+
     </div>
 </body>
 

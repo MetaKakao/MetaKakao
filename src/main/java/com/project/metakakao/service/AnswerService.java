@@ -18,15 +18,16 @@ public class AnswerService {
 
     public void saveAnswer(Long questionId, String answerContent) {
         Question question = questionRepository.findById(questionId)
-                .orElseThrow(() -> new IllegalArgumentException("Question 정보를 조회할 수 없습니다. QID: " + questionId));
-        Answer answer = Answer.builder()
-                .content(answerContent)
-                .regDate(LocalDateTime.now())
-                .question(question) // 질문과의 관계 설정
-                .build();
+                .orElseThrow(() -> new IllegalArgumentException("Invalid question ID: " + questionId));
+
+        Answer answer = question.getAnswer();
+        if (answer == null) {
+            answer = new Answer();
+            answer.setQuestion(question);
+        }
+        answer.setContent(answerContent);
+        answer.setRegDate(LocalDateTime.now());
 
         answerRepository.save(answer);
-        question.setAnswer(answer);
-        questionRepository.save(question);
     }
 }
