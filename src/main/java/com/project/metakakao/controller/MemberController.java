@@ -1,47 +1,40 @@
-//package com.project.metakakao.controller;
-//
-//import com.project.metakakao.dto.MemberJoinDTO;
-//import com.project.metakakao.service.MemberService;
-//import lombok.RequiredArgsConstructor;
-//import lombok.extern.log4j.Log4j2;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-//
-//@Controller
-//@RequestMapping("/member")
-//@Log4j2
-//@RequiredArgsConstructor
-//public class MemberController {
-//    private final MemberService memberService;
-//
-//    //근데 회원가입 페이지는 따로 없지 않나...
-//
-//    @GetMapping("/join")
-//    public void joinGET(){
-//
-//        log.info("회원 가입 페이지 요청");
-//
-//    }
-//
-//    @PostMapping("/join")
-//    public String joinPOST(MemberJoinDTO memberJoinDTO, RedirectAttributes redirectAttributes){
-//
-//        log.info("join post...");
-//        log.info(memberJoinDTO);
-//
-//        try {
-//            memberService.join(memberJoinDTO);
-//        } catch (MemberService.MidExistException e) {
-//
-//            redirectAttributes.addFlashAttribute("error", "mid");
-//            return "redirect:/member/join";
-//        }
-//
-//        redirectAttributes.addFlashAttribute("result", "success");
-//
-//        return "redirect:/"; //회원 가입 후 로그인
-//    }
-//}
+package com.project.metakakao.controller;
+
+import com.project.metakakao.dto.KakaoDTO;
+import com.project.metakakao.entity.Member;
+import com.project.metakakao.entity.Question;
+import com.project.metakakao.service.KakaoService;
+import com.project.metakakao.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
+@Controller
+public class MemberController {
+
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private KakaoService kakaoService;
+    @GetMapping("/member/{memberId}")
+    public String getMemberProfile(@PathVariable int memberId, HttpServletRequest request, Model model) throws Exception {
+        System.out.println("getMemberProfile");
+        Member member = memberService.getMemberById(memberId); // Member ID를 사용하여 사용자 정보 조회
+        HttpSession session = request.getSession();
+        String accessToken = (String) session.getAttribute("accessToken");
+        KakaoDTO kakaoDTO = kakaoService.getUserInfoWithTokenPub(accessToken);
+        List<Question> questionList = member.getQuestionList();
+        System.out.print("QuestionList: "+questionList);
+        model.addAttribute("user", member); //페이지 주인
+        model.addAttribute("kakaoDTO", kakaoDTO);   //현재 접속한 유저
+        model.addAttribute("questionList", questionList);   //페이지 주인의록질문목
+        return "question/question";
+    }
+}

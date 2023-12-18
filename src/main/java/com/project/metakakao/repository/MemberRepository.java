@@ -7,11 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Member, String> {
-    @EntityGraph(attributePaths = "roleSet")
-    @Query("select m from Member m where m.mid = :mid")
-    Optional<Member> getWithRoles(String mid);
-
-    @EntityGraph(attributePaths = "roleSet")
+public interface MemberRepository extends JpaRepository<Member, Integer> {
     Optional<Member> findByEmail(String email);
+
 }
