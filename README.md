@@ -1,7 +1,5 @@
 # MetaKakao <img src="https://github.com/MetaKakao/MetaKakao/blob/main/MetaKakao_compressed.png" align="left" width="100"></a>
-### MZ세대를 위한 여행 기록 및 도장깨기 어플
-
-<br>
+### 카카오톡 친구와 나누는 익명 질의응답 웹서비스
 
 ## 주요 기능
 
