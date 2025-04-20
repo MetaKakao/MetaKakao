@@ -14,6 +14,8 @@
 
 
 ## Tech Stack
+**Language**
+- Java 11
 **Web** - <img src="https://img.shields.io/badge/JSP-%23f44747?style=for-the-social&logo=java&logoColor=white">
 
 **Framework** - <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-social&logo=SpringBoot&logoColor=white">  <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-social&logo=Gradle&logoColor=white">
