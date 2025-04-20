@@ -4,20 +4,23 @@
 ## 주요 기능
 
 ## Developers
-**Front-endr** : <a href="https://github.com/Iamsumin">정수민</a> <br>
-**Back-end** : <a href="https://github.com/leaf1191">심종우</a> <br>
+**Front-end** : <a href="https://github.com/Ezcho">조동영</a> <br>
+**Back-end** : <a href="https://github.com/Ezcho">조동영</a> <br>
 **Back-end** : <a href="https://github.com/minyeongg">박민영</a>
 
 ## 역할 분담
-
+- 조동영: 카카오 로그인, 익명 질문
+- 박민영: 퀴즈 게임
 
 
 ## Tech Stack
+**Web** - <img src="https://img.shields.io/badge/JSP-%23f44747?style=for-the-social&logo=java&logoColor=white">
+
 **Framework** - <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-social&logo=SpringBoot&logoColor=white">  <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-social&logo=Gradle&logoColor=white">
 
 **ORM** - <img src="https://img.shields.io/badge/Spring Data JPA-6DB33F?style=for-the-social&logo=Databricks&logoColor=white">
 
-**Authorization** - <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-social&logo=springsecurity&logoColor=white">  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-social&logo=JSON%20Web%20Tokens&logoColor=white">
+**Authorization** - <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-social&logo=springsecurity&logoColor=white">  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-social&logo=JSON%20Web%20Tokens&logoColor=white"> <img src="https://img.shields.io/badge/OAuth2.0-4285F4?style=for-the-social&logo=OAuth&logoColor=white">
 
 **Database** - <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-social&logo=MariaDB&logoColor=white"> 
 
