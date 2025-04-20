@@ -20,7 +20,7 @@
 
 **ORM** - <img src="https://img.shields.io/badge/Spring Data JPA-6DB33F?style=for-the-social&logo=Databricks&logoColor=white">
 
-**Authorization** - <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-social&logo=springsecurity&logoColor=white">  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-social&logo=JSON%20Web%20Tokens&logoColor=white"> <img src="https://img.shields.io/badge/OAuth2.0-4285F4?style=for-the-social&logo=OAuth&logoColor=white">
+**Authorization** - <img src="https://img.shields.io/badge/JWT-000000?style=for-the-social&logo=JSON%20Web%20Tokens&logoColor=white"> <img src="https://img.shields.io/badge/OAuth2.0-4285F4?style=for-the-social&logo=OAuth&logoColor=white">
 
 **Database** - <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-social&logo=MariaDB&logoColor=white"> 
 
