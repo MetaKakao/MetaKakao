@@ -1,4 +1,4 @@
-# MetaKakao <img src="https://github.com/2023ToolsProject/trablog-spring/blob/main/images/8957ea318563acdc4a08ca50e611fdab.jpg" align="left" width="100"></a>
+# MetaKakao <img src="https://github.com/MetaKakao/MetaKakao/blob/main/MetaKakao_compressed.png" align="left" width="100"></a>
 ### MZ세대를 위한 여행 기록 및 도장깨기 어플
 
 <br>
