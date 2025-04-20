@@ -2,6 +2,12 @@
 ### 카카오톡 친구와 나누는 익명 질의응답 웹서비스
 
 ## 주요 기능
+### 익명 질문
+<img src="https://github.com/MetaKakao/MetaKakao/blob/main/docs/function1.png" width="500" height="250">
+<img src="https://github.com/MetaKakao/MetaKakao/blob/main/docs/function2.png" width="500" height="250">
+
+### 퀴즈 게임
+<img src="https://github.com/MetaKakao/MetaKakao/blob/main/docs/function3.png" width="500" height="250">
 
 ## Developers
 **Front-end** : <a href="https://github.com/Ezcho">조동영</a> <br>
