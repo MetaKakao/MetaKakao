@@ -8,7 +8,7 @@
 **Back-end** : <a href="https://github.com/Ezcho">조동영</a> <br>
 **Back-end** : <a href="https://github.com/minyeongg">박민영</a>
 
-## 역할 분담
+## 역할
 - 조동영: 카카오 로그인, 익명 질문
 - 박민영: 퀴즈 게임
 
@@ -30,4 +30,4 @@
 **Infra Structure** - <img src ="https://img.shields.io/badge/AWS EC2-FF9900?style=for-the-social&logo=amazonec2&logoColor=white"> 
 
 ## Database Schema
-<img src="https://github.com/2023ToolsProject/trablog-spring/blob/main/docs/erd.png" width="450" height="900">
+<img src="https://github.com/MetaKakao/MetaKakao/blob/main/MetaKakao_erd.png" width="450" height="800">
